@@ -29,3 +29,27 @@ app.get('/users',function(req,res) {
         }
     });
 });
+app.post('/login',function(req,res) {
+    connection.query("SELECT * FROM log WHERE username=?",[req.body.username],function (err,rows,fields) {
+        if(err){
+           res.json({"error":true,
+                     "message":"error reguarding the mysql"});
+                      }
+                      else{
+                         res.json(rows);
+                      }
+
+    });
+});
+app.post('/signup',function (req,res) {
+     connection.query("INSERT INTO log SET username=?,password=?,email=?",[req.body.username,req.body.password,req.body.email],function (err,rows,fields) {
+       if(err){
+          res.json({"error":true,
+                      "message":"error regarding the mysql query"});
+       }
+       else{
+           res.json({"error":false,
+                     "message":"user added successfully"});
+       }
+     });
+});
