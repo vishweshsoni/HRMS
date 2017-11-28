@@ -20,7 +20,7 @@ import java.net.URL;
  */
 
 public class BackgroundWorker extends AsyncTask<String,String,String> {
-
+    URL url = null;
     @Override
     protected String doInBackground(String... strings) {
         String name=strings[0];
@@ -30,46 +30,61 @@ public class BackgroundWorker extends AsyncTask<String,String,String> {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
          String result=null;
+
         try {
-            URL url=new URL("192.168.43.128:3000/api/login");//smbhlo have aai ne vat mare bhar javanu
+             url=new URL("http://192.168.43.128:3000/login");
+             //This line will open connection to network using http protocol
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+
+            //This line will set method for http connection
+            urlConnection.setRequestMethod("POST");
+
+            //This line will enable output means you can write query parameters to outputstream
+            //Below you will find BufferedOutputStream to write 'query' variable to o/p stream to send it to server
             urlConnection.setDoOutput(true);
+
+            //This line will enable input that means you will be able to read whatever data returns from the network call
+            //Look InputStream code, you will loop through each line from BufferedInputStream
             urlConnection.setDoInput(true);
 
+            //These commented lines are timeout setting, if you're server or internet is slow then how much time should be spend
+            //to request for JSON data using API, that it will decide
+            //   urlConnection.setReadTimeout(10000 /* milliseconds */);
+           // urlConnection.setConnectTimeout(15000 /* milliseconds */);
 
-            // Append parameters to URL
+            //Building POST parameters, think for GET Too, what if get request arrives?
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("username", strings[0])
                     .appendQueryParameter("password", strings[1]);
             String query = builder.build().getEncodedQuery();
+
+
+
+            // Append parameters to URL, see this will only work if you set urlConnection.setOutput(true), so that you can write query parameters.
             OutputStream os = urlConnection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            //see writing query
             writer.write(query);
             writer.flush();
             writer.close();
             os.close();
             StringBuffer buffer = new StringBuffer();
+            //This will now connect to server, that means actual send button clicked from postman like thing
             urlConnection.connect();
-InputStream is=urlConnection.getInputStream();
-    BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(is));
-    String line;
-    while ((line=bufferedReader.readLine())!=null){
-        // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-        // But it does make debugging a *lot* easier if you print out the completed
-        // buffer for debugging.
-        buffer.append(line + "\n");
-    }
-            if (buffer.length() == 0) {
-                // Stream was empty.  No point in parsing.
-                return null;
+
+            //Now this will return data, and you will need to read, so urlConnection.setInput(true) then and only then
+            //you will read your JSON otherwise exception will be occurred.
+            InputStream is=urlConnection.getInputStream();
+            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(is,"UTF-8"));
+            String line;
+            while ((line=bufferedReader.readLine())!=null){
+                buffer.append(line);
             }
-            String r= buffer.toString();
-            return r;
+            if (buffer.length() == 0) {
+                 return null;
+            }
+            String r= buffer.toString(); // Actual response converted to string
+            return r; // This returned value will be parameter for OnPostExecute () method argument
 
 
         } catch (MalformedURLException e) {
@@ -94,7 +109,7 @@ InputStream is=urlConnection.getInputStream();
     }
 
    @Override
-   protected void onPostExecute(String s){
+   protected void onPostExecute(String s){ //see
             super.onPostExecute(s);
             if ( s != null)
                 Log.i("Json",s);
