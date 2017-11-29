@@ -60,7 +60,8 @@
         android:layout_below="@+id/editText7"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
-        android:text="Register" />
+        android:text="Register"
+        android:onClick="register_click"/>
 
 
 </RelativeLayout>

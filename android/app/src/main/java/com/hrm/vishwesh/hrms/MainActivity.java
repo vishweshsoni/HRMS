@@ -32,10 +32,15 @@ public class MainActivity extends AppCompatActivity {
         BackgroundWorker backgroundWorker=new BackgroundWorker();
 
         backgroundWorker.execute(username,password,null);
-//yes ap
+
     }
 
     public void signup_click(View view) {
 
+           Intent i=new Intent(this,signup.class);
+           startActivity(i);
+
+
     }
+
 }
