@@ -1,6 +1,7 @@
 package com.hrm.vishwesh.hrms;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -77,8 +78,15 @@ public class BackgroundSignup extends AsyncTask<Httpcall,String,String> {
     }
 
 
-
-
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        if ( s != null)
+            Log.i("Json",s);
+        else {
+            Log.d("Backgroundsingup----->","Failed, something went wrong!");
+        }
+    }
 
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
