@@ -52,6 +52,7 @@ app.post('/signup',function (req,res) {
                      "message":"user added successfully"});
        }
      });
+   });
      app.post('/user',function (req,res) {
        connection.query("SELECT * FROM log WHERE username=?",[req.body.username],function (err,rows,fields) {
            if(err){
@@ -63,5 +64,19 @@ app.post('/signup',function (req,res) {
                          }
 
        });
-
+});
+app.post('/applyleave',function (req,res) {
+               connection.query("INSERT INTO apply_leave set emp_name=?,leave_type=?,from_date=?,to_date=?",
+               [req.body.emp_name,req.body.leave_type,req.body.from_date,req.body.to_date],function (err,rows,fields) {
+                  if(err){
+                          res.json({
+                          "erroe":true,
+                          "message":"error executing the apply leave"
+                       });
+                  }
+                  else{
+                       res.json({"error":false,
+                                  "message":"leave has been request is done"});
+                  }
+                });
 });
