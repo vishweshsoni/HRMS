@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -35,6 +36,17 @@ Button b1;
         String pass=e3.getText().toString();
         String email=e4.getText().toString();
 
+        //email validation
+        String  emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        if(email.matches(emailPattern)){
+            Toast.makeText(this, "valid email address",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else{
+            e4.setError("please enter valid email");
+            e4.requestFocus();
+        }
           Intent i=new Intent(this,login_activity.class);
 
            if(TextUtils.isEmpty(id)){
