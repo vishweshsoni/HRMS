@@ -65,18 +65,16 @@ app.post('/signup',function (req,res) {
 
        });
 });
-app.post('/applyleave',function (req,res) {
-               connection.query("INSERT INTO apply_leave set emp_name=?,leave_type=?,from_date=?,to_date=?",
-               [req.body.emp_name,req.body.leave_type,req.body.from_date,req.body.to_date],function (err,rows,fields) {
-                  if(err){
-                          res.json({
-                          "erroe":true,
-                          "message":"error executing the apply leave"
-                       });
-                  }
-                  else{
-                       res.json({"error":false,
-                                  "message":"leave has been request is done"});
-                  }
-                });
-});
+  app.post('/leave_policy',function(req,res) {
+              connection.query("INSERT INTO leave_policy_tb set policy_id=?,sick_leave=?,casual_leave=?,privillage_leave=?,holidays_leave=?",[req.body.policy_id,req.body.sick_leave,req.body.casual_leave,req.body.privillage_leave,req.body.holidays_leave],function (err,rows,fields) {
+                                                 if(err){
+                                                      // res.json({"error":true,
+                                                      //             "message":"error reguarding the"});
+                                                        console.log(err);}
+                                                                  else{
+                                                                     res.json(rows);
+                                                                  }
+
+            });
+
+  });
