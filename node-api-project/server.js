@@ -66,7 +66,7 @@ app.post('/signup',function (req,res) {
        });
 });
   app.post('/leave_policy',function(req,res) {
-              connection.query("INSERT INTO leave_policy_tb set policy_id=?,sick_leave=?,casual_leave=?,privillage_leave=?,holidays_leave=?",[req.body.policy_id,req.body.sick_leave,req.body.casual_leave,req.body.privillage_leave,req.body.holidays_leave],function (err,rows,fields) {
+              connection.query("INSERT INTO leave_policy_tb set sick_leave=?,casual_leave=?,privillage_leave=?,holidays_leave=?",[req.body.sick_leave,req.body.casual_leave,req.body.privillage_leave,req.body.holidays_leave],function (err,rows,fields) {
                                                  if(err){
                                                                 res.json({"error":true,
                                                                    "message":"error reguarding the"});}
