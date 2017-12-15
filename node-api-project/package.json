@@ -23,5 +23,7 @@
     "md5": "^2.2.1",
     "mysql": "^2.15.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.12.7"
+  }
 }

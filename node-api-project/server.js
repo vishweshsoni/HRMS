@@ -70,7 +70,7 @@ app.post('/signup',function (req,res) {
                                                  if(err){
                                                                 res.json({"error":true,
                                                                    "message":"error reguarding the"});}
-                                                        //console.log(err);}checking the error for terminal
+                                                      //  console.log(err);}//checking the error for terminal
                                                                   else{
                                                                      res.json(rows);
 
@@ -79,3 +79,15 @@ app.post('/signup',function (req,res) {
             });
 
   });
+app.post('/apply_leave',function (req,res) {
+          connection.query("INSERT INTO apply_leave set req_sick=?,req_casual=?,req_privillage=?,req_to_date=?,req_from_date=?",[req.body.req_sick,req.body.req_casual,req.body.req_privillage,req.body.req_to_date,req.body.req_from_date],function (err,rows,fields) {
+                                        if(err){
+                                        //    res.json({"error":true,
+                                        //              "message":"error reguarding the mysql"});
+                                        // }
+                                        console.log(err);}
+                                        else{
+                                           res.json(rows);
+                                        }
+          });
+});
