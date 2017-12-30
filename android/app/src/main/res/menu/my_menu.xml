@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home_black"
+        android:title="Home" />
+    <item
+        android:id="@+id/leave_status"
+        android:icon="@drawable/ic_track_changes_black"
+        android:title="Leave status" />
+    <item
+        android:id="@+id/salary"
+        android:icon="@drawable/ic_attach_money_black"
+        android:title="Salary" />
+    <item
+        android:id="@+id/attendance"
+        android:icon="@drawable/ic_accessibility_black"
+        android:title="Attendance" />
+</menu>

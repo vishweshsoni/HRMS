@@ -81,7 +81,7 @@ app.post('/leave_policy',function(req,res) {
                                                                      res.json(rows);
 
                                                                   }
-
+res
             });
 
   });
@@ -94,29 +94,58 @@ app.post('/apply_leave',function (req,res) {
                  req.body will have these parameters 1. emp_id 2. type of leave 3. number of leaves wanted
                  and you will insert these data in leave application table after all above checks. now call me
               */
-          connection.query("INSERT INTO apply_leave set emp_id=?,req_sick=?,req_casual=?,req_privillage=?,req_to_date=?,req_from_date=?",[req.body.emp_id,req.body.req_sick,req.body.req_casual,req.body.req_privillage,req.body.req_to_date,req.body.req_from_date],function (err,rows,fields) {
-                                        if(err){
-                                            res.json({"error":true,
-                                                      "message":"error reguarding the mysql"});
-                                         }
-                                      //  console.log(err);}
-                                        else{
-                                           var apply_leave_response=JSON.stringify(rows);
-                                           //res.json(rows);
-                                           connection.query("SELECT * FROM apply_leave WHERE emp_id=?",[emp_id],function (err,rows,fields) {
-                                             if(err){
-                                                  console.log(err);
-                                              }
-                                           //  console.log(err);}
-                                             else{
+           connection.query("SELECT * FROM remaining_leave_tb WHERE emp_id=?",[emp_id],function(err,result1,fields) {
+                          if(err)
+                          {console.log("error fetching from remaining_leave_tb");}
+                          else{
+                             var remaining_sick=result1[0].remaining_sick;
+                             var remaining_casual=result1[0].remaining_casual;
+                             var remaining_privilliges=result1[0].remaining_privilliges;
+                             if(remaining_sick>=req.body.req_sick){
+                                  var allowed_sick=true;
+                             }
+                             else if(remaining_casual>=req.body.req_sick){
+                                var allowed_casual=true;
+                             }
+                             else if(remaining_privilliges>=req.body.req_privillage){
+                                var allowed_privillage=true;
+                             }else{
+                                allowed_sick=false;
+                                allowed_casual=false;
+                                allowed_privillage=false;
+                             }
 
-                                                applied_leave_response=rows;
+                             if(allowed_sick==true && allowed_casual==true && allowed_privillage==true){
+                               connection.query("INSERT INTO apply_leave set emp_id=?,req_sick=?,req_casual=?,req_privillage=?,req_to_date=?,req_from_date=?",[req.body.emp_id,req.body.req_sick,req.body.req_casual,req.body.req_privillage,req.body.req_to_date,req.body.req_from_date],function (err,rows2,fields) {
+                                                             if(err){
+                                                                 res.json({"error":true,
+                                                                           "message":"error reguarding the mysql to insert the data for apply_leave"});
+                                                              }
+                                                             else{
+                                                                var apply_leave_response=JSON.stringify(rows2);
+                                                                //res.json(rows);
+                                                                connection.query("SELECT * FROM apply_leave WHERE emp_id=?",[emp_id],function (err,rows3,fields) {
+                                                                  if(err){
+                                                                       console.log(err);
+                                                                   }
+                                                                //  console.log(err);}
+                                                                  else{
 
-                                                res.json(applied_leave_response);
-                                             }
-                                           });
-                                        }
-          });
+                                                                     applied_leave_response=rows3;
+
+                                                                     res.json(applied_leave_response);
+                                                                  }
+                                                                });
+                                                             }
+                               });
+                             }
+                             else{
+                                res.json({"message":"you're not allowed"});
+                             }
+                          }
+            });
+
+
 
 
 
@@ -133,41 +162,45 @@ app.post('/leave_status',function(req,res) {
            var policy_tb_privillage_leave=result[0].privillage_leave;
            console.log(counter);
 //have ahiya check kar ke leaves j joie e and sick leave ni andar che ke nai etli leaves and ahiya niche j insert ni query lakhi de etle kam puru taru
-              if(counter===0){
-                       counter++;
-                       console.log(counter);
-              connection.query("INSERT INTO remaining_leave_tb set emp_id=?,policy_id=?,remaining_sick=?,remaining_casual=?,remaining_privilliges=?",[emp_id,policy_id,policy_tb_sick_leave,policy_tb_casual_leave,policy_tb_privillage_leave],function(err,results,fields) {
-                        if(err){
-                         console.log(err);
-                         }else{
-                           console.log("Inserted first initiallisation");
-                          }
-                  });
-              }
+              // if(counter===0){
+              //          counter++;
+              //          console.log(counter);0
+              // connection.query("INSERT INTO remaining_leave_tb set emp_id=?,policy_id=?,remaining_sick=?,remaining_casual=?,remaining_privilliges=?",[emp_id,policy_id,policy_tb_sick_leave,policy_tb_casual_leave,policy_tb_privillage_leave],function(err,results,fields) {
+              //           if(err){
+              //            console.log(err);
+              //            }else{
+              //              console.log("Inserted first initiallisation");
+              //             }
+              //     });
+              // }
               connection.query("SELECT * FROM apply_leave WHERE emp_id=?",[emp_id],function(err,results,fields) {
-                  if(err){console.log("error reguarding the leave selecting");}
+                  if(err){//console.log("error reguarding the leave selecting");}
                   else{
                     console.log(counter);
                      var apply_leave_sick_leave=result[0].req_sick;
                      var apply_leave_casual_leave=result[0].req_casual;
                      var apply_leave_privillage_leave=result[0].req_privillage;
                       if(policy_tb_sick_leave<apply_leave_sick_leave){
-                         res.json({"error":true,"message":"You dont have this amount of leave"});
-                      }
-                      else{
-                        res.json({"message":"wait for the manager approval"});
-                      }
-                       if(policy_tb_casual_leave<apply_leave_casual_leave){
-                         res.json({"error":true,"message":"You dont have this amount of leave"});
-                      }
-                      else{
-                        res.json({"message":"wait for the manager approval"});}
-                       if(policy_tb_privillage_leave<apply_leave_privillage_leave){
-                         res.json({"error":true,"message":"You dont have this amount of leave"});
+                                   var ammount_sick_allowed=false;
+                      }else if(policy_tb_casual_leave<apply_leave_casual_leave){
+                         var ammount_casual_allowed=false;
+                      }else if(policy_tb_privillage_leave<apply_leave_privillage_leave){
+                               var ammount_privillage_allowed=false;
                       }else{
-                        res.json({"message":"wait for the manager approval"});}
+
+                        ammount_sick_allowed=true;
+                        ammount_casual_allowed=true;
+                        ammount_privillage_allowed=true;
                   }
-              });
+                  if(ammount_sick_allowed==false && ammount_casual_allowed==false && ammount_privillage_allowed==false)
+                  {
+                       res.json({"error":true,"message":"You dont have this amount of leave"});
+                  }
+                  else{
+                      res.json({"message":"wait for the manager approval"});
+                  }
+              }
+            });
 
 
 
