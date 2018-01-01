@@ -4,31 +4,76 @@
     android:layout_height="match_parent"
     tools:context="com.hrm.vishwesh.hrms.leave_status">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/apply_leave_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:text="apply_leave"
+        android:onClick="apply_leave_click"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:text="apply_leave" />
+        android:text="Remaining_privillages"
+        android:textSize="22sp" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignStart="@+id/button4"
-        android:layout_below="@+id/button4"
-        android:layout_marginTop="82dp"
-        android:text="Leave_status" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/remaining_casual"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="48dp"
+        android:text="Remaining_sick"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView5cd"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="37dp"
+        android:text="Remaining_casuals"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/remaining_privillages"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/remaining_sick"
+        android:layout_alignStart="@+id/remaining_sick"
+        android:layout_alignTop="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/remaining_sick"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp" />
+
+    <TextView
+        android:id="@+id/remaining_casual"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/remaining_sick"
+        android:layout_alignStart="@+id/remaining_sick"
+        android:layout_alignTop="@+id/textView5cd" />
+
 
 </RelativeLayout>

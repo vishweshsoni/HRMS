@@ -57,7 +57,14 @@ public class leave_status extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            BackgroundLeaveStatus bg_ls=new BackgroundLeaveStatus();
+            bg_ls.execute();
         }
+
+
+    }
+    public void apply_leave_click(View view){
+
     }
 
     @Override
