@@ -22,7 +22,7 @@ import java.util.Map;
  */
 
 public class BackgroundSignup extends AsyncTask<Httpcall,String,String> {
-
+//sign
     @Override
 
 
@@ -33,7 +33,7 @@ public class BackgroundSignup extends AsyncTask<Httpcall,String,String> {
         StringBuilder response = new StringBuilder();
         try {
              String dataParams=getPostDataString(httpcall.getParams());
-             URL url=new URL("http://192.168.43.128:3000/signup");
+             URL url=new URL("http://192.168.43.127:3000/signup");
              urlConnection = (HttpURLConnection) url.openConnection();
              urlConnection.setRequestMethod("POST");
              urlConnection.setDoOutput(true);

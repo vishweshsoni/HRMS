@@ -32,7 +32,7 @@ public class BackgroundWorker extends AsyncTask<String,String,String> {
          String result=null;
 
         try {
-             url=new URL("http://192.168.43.128:3000/login");
+             url=new URL("http://192.168.43.127:3000/login");
              //This line will open connection to network using http protocol
             urlConnection = (HttpURLConnection) url.openConnection();
 

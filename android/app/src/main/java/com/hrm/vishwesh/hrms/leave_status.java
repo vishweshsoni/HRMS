@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.HashMap;
 
 
 /**
@@ -17,7 +20,7 @@ import android.view.ViewGroup;
  * Use the {@link leave_status#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class leave_status extends Fragment {
+public class leave_status extends Fragment implements BackgroundLeaveStatus.goBackToParentFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,8 +60,7 @@ public class leave_status extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            BackgroundLeaveStatus bg_ls=new BackgroundLeaveStatus();
-            bg_ls.execute();
+
         }
 
 
@@ -71,6 +73,13 @@ public class leave_status extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        HashMap<String,String> params=new HashMap<>();
+        params.put("emp_id","1");
+//            params.put("policy_id","STD009");
+        Httpcall httpCall = new Httpcall();
+        httpCall.setParams(params);
+        BackgroundLeaveStatus bg_ls=new BackgroundLeaveStatus(this);
+        bg_ls.execute(httpCall);
         return inflater.inflate(R.layout.fragment_leave_status, container, false);
     }
 
@@ -111,5 +120,10 @@ public class leave_status extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void setResponse(Employee e) {
+        Log.d("Leave status", "------->>> Ai gayu..." + e.toString());
     }
 }
