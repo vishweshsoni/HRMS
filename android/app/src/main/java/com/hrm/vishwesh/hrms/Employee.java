@@ -9,6 +9,25 @@ public class Employee {
     String lastName;
     String remaining_sick;
 
+    String remaining_casual;
+    String getRemaining_privillages;
+
+    public String getRemaining_casual() {
+        return remaining_casual;
+    }
+
+    public void setRemaining_casual(String remaining_casual) {
+        this.remaining_casual = remaining_casual;
+    }
+
+    public String getGetRemaining_privillages() {
+        return getRemaining_privillages;
+    }
+
+    public void setGetRemaining_privillages(String getRemaining_privillages) {
+        this.getRemaining_privillages = getRemaining_privillages;
+    }
+
     public String getFirstName() {
         return firstName;
     }

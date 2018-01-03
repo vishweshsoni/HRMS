@@ -3,13 +3,16 @@ package com.hrm.vishwesh.hrms;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeoutException;
 
 
 /**
@@ -25,7 +28,7 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    TextView sick,casual,privillages;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -72,15 +75,15 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView=inflater.inflate(R.layout.fragment_leave_status, container, false);
+
         // Inflate the layout for this fragment
-        HashMap<String,String> params=new HashMap<>();
-        params.put("emp_id","1");
-//            params.put("policy_id","STD009");
-        Httpcall httpCall = new Httpcall();
-        httpCall.setParams(params);
-        BackgroundLeaveStatus bg_ls=new BackgroundLeaveStatus(this);
-        bg_ls.execute(httpCall);
-        return inflater.inflate(R.layout.fragment_leave_status, container, false);
+
+        sick=(TextView)rootView.findViewById(R.id.remaining_sick);
+        casual=(TextView)rootView.findViewById(R.id.remaining_casual);
+        privillages=(TextView)rootView.findViewById(R.id.remaining_privillages);
+        return  rootView;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -99,6 +102,7 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
+
     }
 
     @Override
@@ -123,7 +127,25 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        HashMap<String,String> params=new HashMap<>();
+        params.put("emp_id","1");
+//            params.put("policy_id","STD009");
+        Httpcall httpCall = new Httpcall();
+        httpCall.setParams(params);
+        BackgroundLeaveStatus bg_ls=new BackgroundLeaveStatus(this);
+        bg_ls.execute(httpCall);
+
+    }
+
+    @Override
     public void setResponse(Employee e) {
-        Log.d("Leave status", "------->>> Ai gayu..." + e.toString());
+//        Log.d("Leave status", "------->>> Ai gayu..." + e.toString());
+      sick.setText(e.getRemaining_sick());
+      casual.setText(e.getRemaining_casual());
+      privillages.setText(e.getGetRemaining_privillages());
+
+
     }
 }
