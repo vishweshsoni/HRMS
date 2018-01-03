@@ -1,6 +1,7 @@
 package com.hrm.vishwesh.hrms;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     TextView sick,casual,privillages;
+    Button b1;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -82,6 +85,14 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
         sick=(TextView)rootView.findViewById(R.id.remaining_sick);
         casual=(TextView)rootView.findViewById(R.id.remaining_casual);
         privillages=(TextView)rootView.findViewById(R.id.remaining_privillages);
+        b1=(Button)rootView.findViewById(R.id.apply_leave_btn);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),Apply_leave.class);
+                       startActivity(i);
+            }
+        });
         return  rootView;
 
     }
@@ -137,7 +148,15 @@ public class leave_status extends Fragment implements BackgroundLeaveStatus.goBa
         BackgroundLeaveStatus bg_ls=new BackgroundLeaveStatus(this);
         bg_ls.execute(httpCall);
 
+
     }
+
+//    public void apply_leave_click(){
+//        Intent i=new Intent(getActivity(),Apply_leave.class);
+//        startActivity(i);
+//
+//
+//    }
 
     @Override
     public void setResponse(Employee e) {

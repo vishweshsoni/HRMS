@@ -30,7 +30,7 @@
 
         </activity>
         <activity android:name=".signup"/>
-
+        <activity android:name=".Apply_leave"/>
     </application>
 
 </manifest>
