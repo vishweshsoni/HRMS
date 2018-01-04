@@ -57,20 +57,23 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sick" />
+            android:text="Sick"
+            android:onClick="onRadioButtonClicked"/>
 
         <RadioButton
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Casual" />
+            android:text="Casual"
+            android:onClick="onRadioButtonClicked"/>
 
         <RadioButton
             android:id="@+id/radioButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Privilliges" />
+            android:text="Privilliges"
+            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
     <Button

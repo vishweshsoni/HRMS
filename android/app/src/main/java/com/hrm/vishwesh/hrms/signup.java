@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-public class signup extends AppCompatActivity {
+public class signup extends AppCompatActivity{
 EditText e1,e2,e3,e4;
 Button b1;
     @Override
