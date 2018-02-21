@@ -40,8 +40,19 @@ app.listen(3000,function(){
 //signincontrol(app);
 
 app.post('/signin',urlencodedParser,function(req,res) {
-  res.render('signin');
-console.log(req.body);
+  //res.render('signin');
+   email=req.body.email;
+   password=req.body.password;
+   connection.query("SELECT * from admin_table WHERE admin_mail=? AND admin_password=?",[req.body.email,req.body.password], function (err,results,fields) {
+            if(err){
+            console.log(err);
+            }else{
+
+                res.render('dashboard');
+
+              }
+
+            });
 
 });
 
