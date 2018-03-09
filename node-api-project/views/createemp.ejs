@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../assets/css/create.css" rel="stylesheet" />
+</head>
+<script src="../assets/js/createe.js"></script>
+<body>
+  <header>
+    <div class="nav">
+      <ul>
+        <li class="home"><a class="active" href="/dashboard1">Home</a></li>
+        <li class="tutorials"><a>Employee</a>
+          <ul>
+            <li><a href="/createemp">Create</a></li>
+            <li><a href="/employee-details">Show</a></li>
+            <li><a href="#">Manage</a></li>
+          </ul>
+        </li>
+        <li class="about"><a href="#">About</a></li>
+        <li class="news"><a href="#">Newsletter</a>
+          <ul>
+            <li><a href="#">News #1</a></li>
+            <li><a href="#">News #2@@@</a></li>
+            <li><a href="#">News #3</a></li>
+          </ul>
+        </li>
+        <li class="contact"><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+  <div class="container" >
+    <h1>Create New Employee</h1>
+    <h2>Create a new account</h2>
+    <form class="form" action="/create2" method="POST">
+
+      <fieldset class="form-fieldset ui-input __first">
+        <input type="text" id="username" tabindex="0" name="username"/>
+        <label for="username">
+          <span data-text="Username">Username</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="form-fieldset ui-input __second">
+        <input type="email" id="email" tabindex="0" name="email"/>
+        <label for="email">
+          <span data-text="E-mail Address">E-mail Address</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="form-fieldset ui-input __third">
+        <input type="password" id="new-password" name="password"/>
+        <label for="new-password">
+          <span data-text="New Password">New Password</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="form-fieldset ui-input __fourth">
+        <input type="password" id="repeat-new-password" />
+        <label for="repeat-new-password">
+          <span data-text="Repeat New Password">Repeat New Password</span>
+        </label>
+      </fieldset>
+       <br>
+      <input type="radio" name="gender" value="male">Male
+          <input type="radio" name="gender" value="female">Female<br><br>
+
+
+
+      <div class="form-footer">
+        <button class="btn">Next</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

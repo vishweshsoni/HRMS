@@ -2,9 +2,46 @@
 <head>
     <title>Signin</title>
     <meta charset="UTF-8">
+    <!--   Core JS Files   -->
+    <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
        <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+       <!-- <script type="text/javascript">
+       $(document).ready(function() {
+           $("#Login").click(function(e){
+             var email_val  = document.login_form.email;
+             alert(email_val.value);
+             alert("Login button clicked");
+             $.ajax({
+               type:'GET',
+               url:'\\trial_path',
+               success:function(str){
+                 alert('success', str);
+                 location.replace('/dashboard1');
+               },
+               error: function(request,str){
+                 // alert("Error occured" + str);
+               },
+             });
+             // e.preventDefault();
+                 // $.ajax({
+                 //       type:'GET',
+                 //       url:,'/createemp',
+                 //       success: function() {
+                 //          // window.location('http://localhost:3000/dashboard1');
+                 //       console.log('success');
+                 //       }
+                 //
+                 // });
+           });
+           // Javascript method's body can be found in assets/js/demos.js
+
+
+       });
+
+       </script> -->
+
 </head>
-<body><form class="login-form" method="POST" action="/signin">
+<body><form class="login-form" method="POST" action="/dashboard">
   <p class="login-text">
     <span class="fa-stack fa-lg">
       <i class="fa fa-circle fa-stack-2x"></i>
@@ -13,7 +50,7 @@
   </p>
   <input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" name="email"/>
   <input type="password" class="login-password" required="true" placeholder="Password" name="password" />
-  <input type="submit" value="Login" class="login-submit" />
+  <input type="submit" id="Login" class="login-submit" />
 </form>
 <a href="#" class="login-forgot-pass">forgot password?</a>
 <div class="underlay-photo"></div>

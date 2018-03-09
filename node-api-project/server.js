@@ -19,6 +19,10 @@ app.get('/signin',function(req,res) {
       // var password=req.query.password;
 
 });
+app.get('/dashboard1',function(req,res) {
+   res.render('dashboard1');
+});
+
 var applied_leave_response=undefined;
 var leave_policy_response=undefined;
 var leave_status_counter=undefined;
@@ -26,8 +30,8 @@ var emp_id=undefined;
 var policy_tb_sick_leave=undefined;
 var counter=0;
 
-app.set('view engine','ejs');
-app.use(express.static('./public'));
+app.set('view engine','ejs');//setting up template embeded java script
+app.use(express.static('./public'));//it will check the routes automaticall in public folder
 
 var urlencodedParser=bodyParser.urlencoded({ extended: true });
 var jsonParser=bodyParser.json();
@@ -36,10 +40,17 @@ app.use(bodyParser.json()); // Body parser use JSON data
 app.listen(3000,function(){
           console.log("All right ! I am alive at Port 3000.");
         });
-//fire sign in controllers
-//signincontrol(app);
 
-app.post('/signin',urlencodedParser,function(req,res) {
+
+// fire sign in controllers
+// signincontrol(app);
+app.get('/createemp',function(req,res) {
+  res.render('createemp');
+});
+app.get('/employee-details',function(req,res) {
+  res.render('createemp');
+});
+app.post('/dashboard',urlencodedParser,function(req,res) {
 
    email=req.body.email;
    password=req.body.password;
@@ -48,7 +59,8 @@ app.post('/signin',urlencodedParser,function(req,res) {
             console.log(err);
             }else{
                 if(results.length>0){
-                      res.render('dashboard');
+                      //res.render('dashboard');
+                      res.render('dashboard1');
                 }else {
                     res.render('signin');
                 }
@@ -58,7 +70,20 @@ app.post('/signin',urlencodedParser,function(req,res) {
 
 });
 
-
+app.post('/create2',function(req,res) {
+  var username=req.body.username;
+  var password=req.body.password;
+  var email=req.body.email
+  var gender=req.body.gender;
+  connection.query("INSERT INTO emp_personal_details set username=?,password=?,email=?,gender=?",[username,password,email,gender],function(err,result,fields) {
+    if(err){
+  res.render('createemp')
+    }
+    else{
+       res.render('create2')
+    }
+  });
+});
 app.get('/users',function(req,res) {
     var data={
         error:1,
