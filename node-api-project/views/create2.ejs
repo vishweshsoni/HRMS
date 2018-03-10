@@ -1,7 +1,74 @@
-<!DOCTYPE html>
-<html>
-<body>
-  <p>welcome</p>
-</body>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="../assets/css/create.css" rel="stylesheet" />
+  </head>
+  <script src="../assets/js/createe.js"></script>
+  <body>
+    <header>
+      <div class="nav">
+        <ul>
+          <li class="home"><a class="active" href="/dashboard1">Home</a></li>
+          <li class="tutorials"><a>Employee</a>
+            <ul>
+              <li><a href="/createemp">Create</a></li>
+              <li><a href="/employee-details">Show</a></li>
+              <li><a href="#">Manage</a></li>
+            </ul>
+          </li>
+          <li class="about"><a href="#">About</a></li>
+          <li class="news"><a href="#">Newsletter</a>
+            <ul>
+              <li><a href="#">News #1</a></li>
+              <li><a href="#">News #2@@@</a></li>
+              <li><a href="#">News #3</a></li>
+            </ul>
+          </li>
+          <li class="contact"><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+    <div class="container" >
+      <h1>Team Details</h1>
+      <h2>Team profile</h2>
+      <form class="form" action="#" method="POST">
 
-</html>
+        <fieldset class="form-fieldset ui-input __first">
+          <input type="text" id="Department" tabindex="0" name="Department"/>
+          <label for="Department">
+            <span data-text="Department">Department</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="form-fieldset ui-input __second">
+          <input type="text" id="post" tabindex="0" name="post"/>
+          <label for="post">
+            <span data-text="Post">Post</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="form-fieldset ui-input __third">
+          <input type="text" id="Manager" name="<Manager"/>
+          <label for="Manager">
+            <span data-text="Manager">Manager</span>
+          </label>
+        </fieldset>
+        <h2>Salary Details</h2>
+
+        <fieldset class="form-fieldset ui-input __fourth">
+          <input type="text" id="Salary" value="    ₹"/>
+          <label for="Salary">
+            <span data-text="Salary">Salary</span>
+          </label>
+        </fieldset>
+
+
+
+              <div class="form-footer">
+          <button class="btn">Next</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  </html>

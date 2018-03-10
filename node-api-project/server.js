@@ -1,11 +1,13 @@
 var express = require('express'); // Express App include
 var http = require('http').Server(app); // http server
 var mysql = require('mysql'); // Mysql include
+var session = require('express-session');//session handeling
 var bodyParser = require("body-parser"); // Body parser for fetch posted data
 var app=express();
 //var signincontrol=require('./controllers/controllogin')(app);
 
-
+app.use(session({secret: 'ssshhhhh'}));
+var sess;//session variable
 
 var connection = mysql.createConnection({ // Mysql Connection
     host : 'localhost',
@@ -69,21 +71,35 @@ app.post('/dashboard',urlencodedParser,function(req,res) {
             });
 
 });
-
+var emp_unique_id;
 app.post('/create2',function(req,res) {
+
   var username=req.body.username;
   var password=req.body.password;
   var email=req.body.email
   var gender=req.body.gender;
   connection.query("INSERT INTO emp_personal_details set username=?,password=?,email=?,gender=?",[username,password,email,gender],function(err,result,fields) {
     if(err){
-  res.render('createemp')
+      console.log(err);
     }
     else{
-       res.render('create2')
+        connection.query("SELECT * FROM emp_personal_details ORDER BY id DESC LIMIT 1",function(err,results,fields) {
+            if(err){
+              console.log(err);
+            }
+
+            else{
+
+              req.session.emp_id = results[0].id;
+              emp_unique_id = results[0].id;
+              res.render('create2',{emp_unique_id});
+            }
+        });
+
     }
   });
 });
+
 app.get('/users',function(req,res) {
     var data={
         error:1,
