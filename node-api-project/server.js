@@ -6,7 +6,10 @@ var bodyParser = require("body-parser"); // Body parser for fetch posted data
 var app=express();
 //var signincontrol=require('./controllers/controllogin')(app);
 
-app.use(session({secret: 'ssshhhhh'}));
+app.use(session({
+     secret: 'ssshhhhh',
+     resave: true,
+    saveUninitialized: true}));
 var sess;//session variable
 
 var connection = mysql.createConnection({ // Mysql Connection
@@ -99,6 +102,16 @@ app.post('/create2',function(req,res) {
     }
   });
 });
+
+// app.post('/create3',function(req,res) {
+//   console.log(req.body.Department);
+//     console.log(req.body.Pos);
+//     // connection.query("INSERT INTO emp_salary_details SET emp_id=?,salary=?,hra=?,da=?,ta=?",[emp_unique_id,req.body.])
+// });
+app.get('/chart',function (req,res) {
+  res.render('chart');
+});
+
 
 app.get('/users',function(req,res) {
     var data={

@@ -229,7 +229,7 @@ h2 {
   color: white;
 }
 
-.__first, .__second, .__third, .__fourth,.__fifth {
+.__first, .__second, .__third, .__fourth,.__fifth,.__sixth,.__seventh {
   animation-name: fadeIn;
   animation-duration: 180ms;
   animation-fill-mode: both;
@@ -241,6 +241,8 @@ h2 {
 .__third { animation-delay: 180ms; }
 .__fourth { animation-delay: 360ms; }
 .__fifth {animation-delay: 480ms;  }
+.__sixth{ animation-delay: 560ms;}
+.__seventh{animation-delay: 680ms;}
 
 @keyframes fadeIn {
   from {
