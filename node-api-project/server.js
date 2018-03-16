@@ -102,6 +102,67 @@ app.post('/create2',function(req,res) {
     }
   });
 });
+//taking a details of team and salary from adminside
+app.post('/create3',function(req,res) {
+    connection.query("INSERT INTO emp_team_details set emp_id=?,department=?,post=?,manager_name=?",[emp_unique_id,req.body.Department,req.body.post,req.body.Manager],function(err,results,fields) {
+        if(err){
+           console.log(err);
+        }
+        else{
+          connection.query("INSERT INTO emp_salary_details set emp_id=?,salary=?,hra=?,da=?,ta=?",[emp_unique_id,req.body.Salary,req.body.HRA,req.body.DA,req.body.TA],function(err,result1,fields) {
+            if(err){
+              console.log(err);
+            }
+            else{
+              console.log(req.body.Manager);
+              connection.query("SELECT * FROM manager_table WHERE manager_name=?",[req.body.Manager],function(err,result2,fields) {
+                  if(err){
+
+                    console.log(err);
+
+                  }
+                  else{
+
+                    connection.query("UPDATE emp_salary_details set manager_id=? WHERE emp_id=?",[result2[0].manager_id,emp_unique_id],function (err,result3,fields) {
+                      if(err){
+                         console.log(err);
+                      }else{
+                        connection.query("UPDATE emp_team_details set manager_id=? WHERE emp_id=?",[result2[0].manager_id,emp_unique_id],function (err,result4,fields) {
+                          if(err){
+                             console.log(err);
+                          }
+                          else{
+                            res.render('create2');
+                          }
+                        });
+                      }
+                    });
+                  }
+              });
+
+            }
+          });
+        }
+    });
+
+});
+
+
+
+app.get('/employeedetails',function(req,res) {
+  var obj={};
+  connection.query("SELECT * FROM emp_personal_details",function(err,results,fields) {
+    if(err){
+      console.log("error");
+    }
+    else{
+      obj = {print: results};
+       res.render('showempdetails',obj);
+
+    }
+  });
+
+});
 
 // app.post('/create3',function(req,res) {
 //   console.log(req.body.Department);

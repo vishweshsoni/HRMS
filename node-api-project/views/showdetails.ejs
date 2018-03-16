@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Details</title>
+
+
+
+    <link href="../assets/css/show.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <div id="users">
+  <input class="search" placeholder="Search" />
+  <button class="sort" data-sort="name">
+    Sort by name
+  </button>
+  <table class="t1">
+    <!-- IMPORTANT, class="list" have to be at tbody -->
+    <tbody class="list">
+      <!-- <tr>
+        <td class="name">Jonny Stromberg</td>
+        <td class="born">1986</td>
+      </tr>
+      <tr>
+        <td class="name">Jonas Arnklint</td>
+        <td class="born">1985</td>
+      </tr>
+      <tr>
+        <td class="name">Martina Elm</td>
+        <td class="born">1986</td>
+      </tr>
+      <tr>
+        <td class="name">vishwesh</td>
+        <td class="born">1983</td>
+      </tr> -->
+      <tr>
+       <td class="id">ID</td>
+       <td class="name">Username</td>
+       <td class="email">Email</td>
+        <td class="gender">Gender</td>
+
+     </tr>
+      <% print.forEach(function (results) { %>
+             <tr>
+                 <td><%= results.id %></td>
+                 <td class="name"><%= results.username %></td>
+                 <td><%= results.email %></td>
+                 <td><%= results.gender %></td>
+             </tr>
+          <% }) %>
+    </tbody>
+  </table>
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+<script src="../assets/js/showdetails.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
