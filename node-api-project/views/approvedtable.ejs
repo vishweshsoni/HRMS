@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!-- this shows reporst inside the reporttable.ejs -->
+<head>
+  <meta charset="UTF-8">
+
+
+
+
+    <link href="../assets/css/show.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <div id="users">
+  <input class="search" placeholder="Search" />
+  <button class="sort" data-sort="name">
+    Sort by name
+  </button>
+  <table class="t1">
+    <!-- IMPORTANT, class="list" have to be at tbody -->
+    <tbody class="list">
+
+      <tr>
+       <td>ID</td>
+       <td>RequestedSick</td>
+       <td>RequestedCasual</td>
+        <td>RequestedPrivillage</td>
+        <td>Todate</td>
+        <td>Fromdate</td>
+        <td>Status</td>
+
+     </tr>
+      <% print.forEach(function (results) { %>
+             <tr>
+                 <td><%= results.emp_id %></td>
+                 <td><%= results.req_sick%></td>
+                 <td><%= results.req_casual %></td>
+                 <td><%= results.req_to_date %></td>
+                 <td><%= results.req_from_date %></td>
+                 <td><%= results.req_status %></td>
+                  <td><button type="submit" id="submitform">
+                      <img src="../assets/img/check.png"/>
+                  </button></td>
+             </tr>
+
+          <% }) %>
+    </tbody>
+  </table>
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+<script src="../assets/js/showdetails.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

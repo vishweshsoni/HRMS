@@ -74,6 +74,7 @@ app.post('/dashboard',urlencodedParser,function(req,res) {
             });
 
 });
+
 var emp_unique_id;
 app.post('/create2',function(req,res) {
 
@@ -102,6 +103,7 @@ app.post('/create2',function(req,res) {
     }
   });
 });
+
 //taking a details of team and salary from adminside
 app.post('/create3',function(req,res) {
     connection.query("INSERT INTO emp_team_details set emp_id=?,department=?,post=?,manager_name=?",[emp_unique_id,req.body.Department,req.body.post,req.body.Manager],function(err,results,fields) {
@@ -132,7 +134,7 @@ app.post('/create3',function(req,res) {
                              console.log(err);
                           }
                           else{
-                            res.render('create2');
+                            res.render('create3');
                           }
                         });
                       }
@@ -146,8 +148,9 @@ app.post('/create3',function(req,res) {
     });
 
 });
-
-
+app.get('/manage',function (req,res) {
+  res.render('report1');
+});
 
 app.get('/employeedetails',function(req,res) {
   var obj={};
@@ -163,16 +166,103 @@ app.get('/employeedetails',function(req,res) {
   });
 
 });
+//reportsalary genration
+app.post('/reportsalary',function(req,res) {
+    var obj={};
+  connection.query("SELECT * FROM  emp_salary_details WHERE salary BETWEEN ? AND ?",[req.body.from,req.body.To],function(err,results,fields) {
+      if(err){
+         console.log(err);
+      }
+      else{
+        obj = {print: results};
+          res.render('reporttable',obj);
+      }
+  });
+});
 
-// app.post('/create3',function(req,res) {
-//   console.log(req.body.Department);
-//     console.log(req.body.Pos);
-//     // connection.query("INSERT INTO emp_salary_details SET emp_id=?,salary=?,hra=?,da=?,ta=?",[emp_unique_id,req.body.])
-// });
+//leave allotment
+var allot_sick,allot_casual,allot_privillage;
+
+app.get('/slot1',function(req,res) {
+  allot_sick=5;
+  allot_casual=5;
+  allot_privillage=5;
+  connection.query("INSERT INTO leave_policy_tb SET emp_id=?,sick_leave=?,casual_leave=?,privillage_leave=?",[emp_unique_id,allot_sick,allot_casual,allot_privillage],function(err,result,fields) {
+    if(err){
+       console.log(err);
+    }else{
+    res.render('create3');
+    }
+  });
+});
+app.get('/slot2',function(req,res) {
+  allot_sick=15;
+  allot_casual=15;
+  allot_privillage=15;
+  connection.query("INSERT INTO leave_policy_tb SET emp_id=?,sick_leave=?,casual_leave=?,privillage_leave=?",[emp_unique_id,allot_sick,allot_casual,allot_privillage],function(err,result,fields) {
+    if(err){
+       console.log(err);
+    }else{
+      res.render('create3');
+    }
+  });
+});
+app.get('/slot3',function(req,res) {
+  allot_sick=25;
+  allot_casual=25;
+  allot_privillage=25;
+  connection.query("INSERT INTO leave_policy_tb SET emp_id=?,sick_leave=?,casual_leave=?,privillage_leave=?",[emp_unique_id,allot_sick,allot_casual,allot_privillage],function(err,result,fields) {
+    if(err){
+       console.log(err);
+    }else{
+      res.render('create3');
+    }
+  });
+});
 app.get('/chart',function (req,res) {
   res.render('chart');
 });
+//approveleave for the
+app.get('/approveleave',function(req,res) {
+  var obj={};
+  var status="pending";
+  connection.query("SELECT * FROM apply_leave WHERE req_status=?",[status],function(err,results,fields) {
+    if(err){
+      console.log(err);
+    }else{
+        obj = {print: results};
+          res.render('approve',obj);
 
+          console.log(obj);
+    }
+  });
+
+
+});
+app.post('/approveleave',function (req,res) {
+  var obj={};
+  var status="approved";
+var status1="pending";
+  connection.query("UPDATE apply_leave SET req_status=? WHERE emp_id=?",[status,req.body.emp_id],function (err,results,fields) {
+    if(err){
+       console.log(err);
+    }
+    else {
+      connection.query("SELECT * FROM apply_leave WHERE req_status=?",[status],function(err,results,fields) {
+        if(err){
+          console.log(err);
+        }else{
+            obj = {print: results};
+              res.render('approve',obj);
+
+
+        }
+      });
+
+    }
+  });
+
+});
 
 app.get('/users',function(req,res) {
     var data={
@@ -420,6 +510,7 @@ var applied_data={ status:"unsuccessful",
 
 
 });
+
 app.post('/leave_status_permission',function(req,res) {
   emp_id=req.body.emp_id;
   policy_id=req.body.policy_id;

@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../assets/css/emp.css" rel="stylesheet" />
+    <link href="../assets/css/create.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
-<body class="news" >
+<script src="../assets/js/createe.js"></script>
+<body>
   <header>
     <div class="nav">
       <ul>
         <li class="home"><a class="active" href="/dashboard1">Home</a></li>
-        <li class="tutorials"><a href="#">Employee</a>
+        <li class="tutorials"><a>Employee</a>
           <ul>
             <li><a href="/createemp">Create</a></li>
-            <li><a href="/employeedetails">Show</a></li>
-            <li><a href="#">Manage</a></li>
+            <li><a href="/employee-details">Show</a></li>
+            <li><a href="/manage">Manage</a></li>
           </ul>
         </li>
         <li class="about"><a href="#">About</a></li>
@@ -27,9 +30,8 @@
         </li>
         <li class="contact"><a href="#">Contact</a></li>
       </ul>
-    </div>
-
-  </header>
-    <%- include showdetails.ejs %>
-</body>
-</html>
+   <!-- <%- include includereport.ejs %> -->
+    <!-- this genrate the table after the query     -->
+   <%- include showreporttable.ejs %>
+    </body>
+  </html>

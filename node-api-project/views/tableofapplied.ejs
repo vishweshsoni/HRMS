@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Details</title>
+
+
+
+    <link href="../assets/css/show.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- // var employee = (data) => {
+  //     approved: function (data){
+  //
+  //     },
+  //     apply: function (data){
+  //
+  //     },
+  //     //operations
+  // };
+  // function func41(val){
+  //
+  //     // alert (val);
+  //
+  //
+  //   $.ajax(function (){
+  //     type: "POST",
+  //     url: http://localhost:3000/approved,
+  //     method: POST,
+  //     data: {emp_id : val},
+  //     success : function (success){
+  //       alert ('success');
+  //     },
+  //     error: function (error){
+  //       alert('error');
+  //     },
+  //   });
+  //   // $.post("http://localhost:3000/approved",{val});
+  //     // window.location.assign("http://localhost:3000/");
+  // } -->
+
+</head>
+<script type="text/javascript">
+    function func41(val) {
+      $.ajax({
+        url:"http://localhost:3000/approveleave",
+        type:"POST",
+        data:{
+          "emp_id":val
+        },
+        dataType:"json",
+        success:function () {
+          console.log("success");
+        },
+        error: function (xhr) {
+          console.log("error");
+        }
+      });
+    }
+</script>
+<body>
+
+  <div id="users">
+
+  <table class="t1">
+    <!-- IMPORTANT, class="list" have to be at tbody -->
+    <tbody class="list">
+
+      <tr>
+       <td class="id">Emp_id</td>
+       <td class="name">Sick Request</td>
+       <td class="email">Casual Request</td>
+        <td class="gender">Privillage Request</td>
+        <td class="gender">To_date</td>
+        <td class="gender">From_date</td>
+        <td class="gender">Allow</td>
+        <td class="gender">Deny</td>
+
+     </tr>
+      <% print.forEach(function (results) { %>
+             <tr>
+                 <td><%= results.emp_id %></td>
+                 <td class="name"><%= results.req_sick %></td>
+                 <td><%= results.req_casual %></td>
+                 <td><%= results.req_privillage %></td>
+                 <td><%= results.req_to_date %></td>
+                 <td><%= results.req_from_date %></td>
+                 <td>
+                    <!-- <img src="../assets/img/icons/check-mark.png"> -->
+                    <button class="button1" onclick="func41(<%= results.emp_id %>)" >
+                        <img src="../assets/img/check.png"/>
+                    </button>
+
+                 </td>
+                 <td>
+                   <button class="button1">
+                   <img src="../assets/img/icons/x-button.png"></td>
+                 </button>
+             </tr>
+          <% }) %>
+    </tbody>
+  </table>
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+<script src="../assets/js/showdetails.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

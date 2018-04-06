@@ -54,6 +54,14 @@ input:focus {
     text-align: center;
   outline:none;
 }
+.button1{
+
+	background-color: #363E4A;
+  padding: 0 0 0 10px;
+  border: 0px;
+  margin: left;
+
+}
 .sort:after {
 
   display:inline-block;
@@ -88,4 +96,13 @@ input:focus {
   position: relative;
   top:-4px;
   right:-5px;
+}
+#submitForm {
+    width: 230px;
+    height: 40px;
+    border: none;
+    background-color: #ff9900;
+    color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
 }

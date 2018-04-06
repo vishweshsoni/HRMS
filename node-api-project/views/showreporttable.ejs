@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" >
-
+<!-- this shows reporst inside the reporttable.ejs -->
 <head>
   <meta charset="UTF-8">
-  <title>Employee Details</title>
+
 
 
 
@@ -23,18 +23,20 @@
     <tbody class="list">
 
       <tr>
-       <td class="id">ID</td>
-       <td class="name">Username</td>
-       <td class="email">Email</td>
-        <td class="gender">Gender</td>
+       <td>ID</td>
+       <td>salary</td>
+       <td>hra</td>
+        <td>da</td>
+        <td>ta</td>
 
      </tr>
       <% print.forEach(function (results) { %>
              <tr>
-                 <td><%= results.id %></td>
-                 <td class="name"><%= results.username %></td>
-                 <td><%= results.email %></td>
-                 <td><%= results.gender %></td>
+                 <td><%= results.emp_id %></td>
+                 <td><%= results.salary %></td>
+                 <td><%= results.hra %></td>
+                 <td><%= results.da %></td>
+                 <td><%= results.ta %></td>
              </tr>
           <% }) %>
     </tbody>

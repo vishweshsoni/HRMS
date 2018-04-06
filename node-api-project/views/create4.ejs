@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!-- its included in create3 view  -->
+<head>
+  <meta charset="UTF-8">
+  <title>Leave Details</title>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="../assets/css/softy.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+  <div class="buttons">
+  <h1>Employee <code>Leave Details</code></h1>
+  <button class="fill" id='slot1' onclick="func1()">Slot1</br></br></br>
+      Sick_leave:5</br>Casual_leave:5</br>Privillage_leave:5
+  </button>
+  <script>
+  function func1() {
+      window.location.assign("http://localhost:3000/slot1");
+  }
+  function func2() {
+    window.location.assign("http://localhost:3000/slot2");
+  }
+  function func3() {
+    window.location.assign("http://localhost:3000/slot3");
+  }
+  function func4() {
+    window.location.assign("http://localhost:3000/dashboard1");
+  }
+</script>
+  <button class="pulse" id="slot2" onclick="func2()">Slot2</br></br></br>
+      Sick_leave:15</br>Casual_leave:15</br>Privillage_leave:15</button>
+  <button class="close" id="slot3" onclick="func3()">Slot3</br></br></br>
+      Sick_leave:25</br>Casual_leave:25</br>Privillage_leave:25</button>
+  <!-- <button class="raise">Raise</button>
+  <button class="up">Fill Up</button>
+  <button class="slide">Slide</button>
+  <button class="offset">Offset</button> -->
+  <button class="offset" id="done" onclick="func4()">Done--></button>
+</div>
+
+
+
+</body>
+
+</html>
