@@ -2,6 +2,7 @@ package com.hrm.vishwesh.hrms;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -54,16 +55,7 @@ public class Apply_leave extends AppCompatActivity implements DatePickerDialog.O
         //radio button
          radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
          radioButton=(RadioButton)findViewById(R.id.radioButton);
-        HashMap<String,String> params=new HashMap<>();
-        params.put("typeOfLeave",radioButton.getText().toString());
-        params.put("req_to_date",req_to_date);
-        params.put("req_from_date",req_from_Date);
-        params.put("emp_id","1");
-        Httpcall httpcall=new Httpcall();
-        httpcall.setParams(params);
 
-        BackgroundApplyLeave bg_apply_leave=new BackgroundApplyLeave();
-        bg_apply_leave.execute(httpcall);
 
 
     }
@@ -73,7 +65,23 @@ public class Apply_leave extends AppCompatActivity implements DatePickerDialog.O
          Log.d("HERE SELECTED----->",radioButton.getText().toString());
 
     }
+ public void onlastapply(View view){
+//           Intent intent=new Intent(this,MainActivity.class);
+//           startActivity(intent);
+     Log.d("try",radioButton.getText().toString());
+     HashMap<String,String> params=new HashMap<>();
+     params.put("typeOfLeave",radioButton.getText().toString());
+     params.put("req_to_date",req_to_date);
+     params.put("req_from_date",req_from_Date);
+     params.put("emp_id","1");
+     Httpcall httpcall=new Httpcall();
+     httpcall.setParams(params);
 
+     BackgroundApplyLeave bg_apply_leave=new BackgroundApplyLeave();
+     bg_apply_leave.execute(httpcall);
+
+
+ }
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
@@ -94,4 +102,5 @@ public class Apply_leave extends AppCompatActivity implements DatePickerDialog.O
         Log.d("Req_to_date---->",req_to_date);
                 button1.setText(req_to_date);}
     }
+
 }

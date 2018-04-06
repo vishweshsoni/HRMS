@@ -63,8 +63,8 @@ public class BackgroundSignup extends AsyncTask<Httpcall,String,String> {
                 }
             }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -78,15 +78,15 @@ public class BackgroundSignup extends AsyncTask<Httpcall,String,String> {
     }
 
 
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        if ( s != null)
-            Log.i("Json",s);
-        else {
-            Log.d("Backgroundsingup----->","Failed, something went wrong!");
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if ( s != null)
+                Log.i("Json",s);
+            else {
+                Log.d("Backgroundsingup----->","Failed, something went wrong!");
+            }
         }
-    }
 
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
